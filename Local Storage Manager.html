@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note App</title>
+</head>
+
+<body>
+    <button>Add Note</button>
+    <div class="note"></div>
+
+    <script>
+
+        function saveNoteToLocalStorage(note) {
+
+            let notes = JSON.parse(localStorage.getItem("notes")) || [];
+
+            notes.push(note);
+
+            localStorage.setItem("notes", JSON.stringify(notes));
+        }
+
+
+        let notes = JSON.parse(localStorage.getItem("notes")) || [];
+        document.querySelector(".note").innerHTML = notes.join("<br>");
+
+
+        document.querySelector("button").addEventListener("click", () => {
+            let note = prompt("Enter your note");
+            saveNoteToLocalStorage(note);
+
+
+            notes.push(note);
+            document.querySelector(".note").innerHTML = notes.join("<br>");
+        });
+
+    </script>
+</body>
+
+</html>
